@@ -23,9 +23,12 @@ const router =createBrowserRouter([
                 element: <LoginPage />
             },
             {
-                path:'/ProductsDetails/:copyProduct_id',
+                path:'/ProductsDetails/:id',
                 element:<ProductsDetails/>
-            }
+            },
+            
+             
+
 
         ]
     },  

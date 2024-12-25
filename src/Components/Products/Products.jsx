@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Card,  Grid, Typography } from "@mui/material";
 
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
@@ -260,7 +260,11 @@ const Products = () => {
     const filteredProducts = selectedCategory
       ? copyProduct.filter((product) => product.Category === selectedCategory)
       : copyProduct;
+
   
+
+
+ 
   return (
     <Box className="d-flex bg-body-tertiary my-5 ">
       <Box className=" mt-3 justify-content-between ">
@@ -286,61 +290,61 @@ const Products = () => {
       </Box>
       <Grid container className=" mt-3">
         {filteredProducts?.map((copyProduct, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>
+       <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}> 
             <Card
-              sx={{
-                marginTop: "20px",
-                padding: "20px",
-                cursor: "pointer",
-                width: "250px",
-                display: "flex",
-                flexDirection: "column",
-              }}
+               sx={{
+                 marginTop: "20px",
+                 padding: "20px",
+                 cursor: "pointer",
+                 width: "250px",
+                 display: "flex",
+             flexDirection: "column",
+               }}
             >
-              <Box
-                className="text-center "
-                sx={{
+             <Box
+                 className="text-center " 
+                 sx={{ 
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   width: "100%",
                   height: "140px",
-                }}
-              >
-                <img
-                  style={{ maxHeight: "100%", maxWidth: "100%" }}
-                  className="product-img my-5 "
-                  src={copyProduct.img} 
-                  onClick={() => {
-                    navigate(`/ProductsDetails/${copyProduct?.id}`);
-                  }}
-                />
-              </Box>
-              <Typography variant="body" className="mt-3 fw-bold">
-                {copyProduct?.title}
-              </Typography>
-              <Box
-                className="d-flex justify-content-between align-items-center mt-2"
-                sx={{ width: "100%" }}
-              >
-                <Typography
+                 }}
+               > 
+                 <img
+                   style={{ maxHeight: "100%", maxWidth: "100%" }} 
+                   className="product-img my-5 "
+                   src={copyProduct.img} 
+                 onClick={() => { 
+                 navigate(`/ProductsDetails/${copyProduct?.id}`);
+                 }}
+                 /> 
+               </Box>
+               <Typography variant="body" className="mt-3 fw-bold">
+               {copyProduct?.title}
+               </Typography>
+               <Box
+              className="d-flex justify-content-between align-items-center mt-2" 
+              sx={{ width: "100%" }} 
+             > 
+                 <Typography
                   variant="body"
-                  className="mt-3 fs-6  fw-bold text-success"
-                >
-                  {copyProduct?.price}
-                </Typography>
-                <Box className=" text-bg-success px-3 py-1 rounded-5  mt-5 mb-3 ">
-                  <ShoppingBasketIcon sx={{ marginRight: "5px" }} />
-                  <Typography variant="button" className=" text-white ">
-                    Cart
+                  className="mt-3 fs-6  fw-bold text-success" 
+                > 
+             {copyProduct?.price}
+                 </Typography>
+                 <Box className=" text-bg-success px-3 py-1 rounded-5  mt-5 mb-3 ">
+                 <ShoppingBasketIcon sx={{ marginRight: "5px" }} />
+                 <Typography variant="button" className=" text-white ">
+                  Cart
                   </Typography>
-                </Box>
-              </Box>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+                 </Box>
+               </Box>
+           </Card>
+           </Grid> 
+         ))}
+       </Grid>
+     </Box>
   );
 };
 export default Products;
