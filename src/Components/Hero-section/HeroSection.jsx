@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const HeroSection = () => {
   return (
+    
     <Box className="d-none d-md-none d-lg-block">
       <Box className="position-relative ">
         <img style={{height:'93vh',width:'100%'}} src={HeroImg} alt="" />
