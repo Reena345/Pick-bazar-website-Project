@@ -8,6 +8,7 @@ import HeroSection from './Components/Hero-section/HeroSection';
 import DeliveryProduct from './Components/Delivery/DeliveryProduct';
 import ProductsDrawerSection from './Components/ProductsDetails/ProductsDetails';
 import Products from './Components/Products/Products';
+import AddToCart from './Components/AddToCart/AddToCart';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <HeroSection />
       <DeliveryProduct />
       <Products />
-      {/* < ProductsDrawerSection/> */}
+       < AddToCart/> 
     </div>
   );
 }

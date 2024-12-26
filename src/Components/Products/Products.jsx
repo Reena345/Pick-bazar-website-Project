@@ -252,7 +252,7 @@ const copyProduct = [
 ];
 
 const Products = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
     // State for selected category
     const [selectedCategory, setSelectedCategory] = useState("");
   
