@@ -36,6 +36,9 @@ import Mixbiscuits27 from "../../assits/Mix biscuits 3.webp";
 import Mixbiscuits28 from "../../assits/Mix biscuits 4.webp";
 import Mixbiscuits29 from "../../assits/Mix biscuits 5.webp";
 import Mixbiscuits30 from "../../assits/Mix biscuits 6.webp";
+import { addToCart } from "../../cartSlice";
+import { useDispatch } from "react-redux";
+
 
 
 const copyProduct = [
@@ -44,28 +47,28 @@ const copyProduct = [
     img: Biscuit1,
     Category: "Nuts & Biscuits",
     title: "Khong Guan Orange Cream",
-    price: "$ 5",
+    price: 5,
   },
   {
     id: 2,
     img: Biscuit2,
     Category: "Nuts & Biscuits",
     title: "Belmont Custard ",
-    price: "$ 0.8",
+    price:  0.8,
   },
   {
     id: 3,
     img: Biscuit3,
     Category: "Nuts & Biscuits",
     title: "Crawford Digestives",
-    price: "$ 10",
+    price:  10,
   },
   {
     id: 4,
     img: Biscuit4,
     Category: "Nuts & Biscuits",
     title: "Jammie Dodgers Raspberry",
-    price: "$ 14",
+    price:  14,
   },
   {
     id: 5,
@@ -251,6 +254,8 @@ const copyProduct = [
   },
 ];
 
+
+
 const Products = () => {
   const navigate = useNavigate(); 
     // State for selected category
@@ -260,7 +265,7 @@ const Products = () => {
     const filteredProducts = selectedCategory
       ? copyProduct.filter((product) => product.Category === selectedCategory)
       : copyProduct;
-
+      const dispatch = useDispatch();
   
 
 
@@ -291,56 +296,55 @@ const Products = () => {
       <Grid container className=" mt-3">
         {filteredProducts?.map((copyProduct, index) => (
        <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}> 
-            <Card
-               sx={{
-                 marginTop: "20px",
-                 padding: "20px",
-                 cursor: "pointer",
-                 width: "250px",
-                 display: "flex",
-             flexDirection: "column",
-               }}
+       <Card
+              sx={{
+                margin: "10px",
+                padding: "10px",
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+              }}
             >
-             <Box
-                 className="text-center " 
-                 sx={{ 
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+              <Box sx={{ textAlign: "center" }}>
+                <img
+                  src={copyProduct.img}
+                  alt={copyProduct.title}
+                  onClick={() => { 
+                    navigate(`/ProductsDetails/${copyProduct?.id}`);
+                    }}
+                  style={{
+                    width: "100%",
+                    maxHeight: "150px",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                  }}
+                />
+              </Box>
+              <Box sx={{ padding: "10px" }}>
+                <Typography variant="h6" component="div">
+                  {copyProduct.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {copyProduct.Category}
+                </Typography>
+                <Typography variant="h6" color="primary">
+                  {copyProduct.price}
+                </Typography>
+              </Box>
+              <Button
+                variant="contained"
+                startIcon={<ShoppingBasketIcon />}
+                sx={{
                   width: "100%",
-                  height: "140px",
-                 }}
-               > 
-                 <img
-                   style={{ maxHeight: "100%", maxWidth: "100%" }} 
-                   className="product-img my-5 "
-                   src={copyProduct.img} 
-                 onClick={() => { 
-                 navigate(`/ProductsDetails/${copyProduct?.id}`);
-                 }}
-                 /> 
-               </Box>
-               <Typography variant="body" className="mt-3 fw-bold">
-               {copyProduct?.title}
-               </Typography>
-               <Box
-              className="d-flex justify-content-between align-items-center mt-2" 
-              sx={{ width: "100%" }} 
-             > 
-                 <Typography
-                  variant="body"
-                  className="mt-3 fs-6  fw-bold text-success" 
-                > 
-             {copyProduct?.price}
-                 </Typography>
-                 <Box className=" text-bg-success px-3 py-1 rounded-5  mt-5 mb-3 ">
-                 <ShoppingBasketIcon sx={{ marginRight: "5px" }} />
-                 <Typography variant="button" className=" text-white ">
-                  Cart
-                  </Typography>
-                 </Box>
-               </Box>
-           </Card>
+                  backgroundColor: "#007BFF",
+                  color: "#fff",
+                  marginTop: "10px",
+                }}
+                onClick={() => dispatch(addToCart(copyProduct))}
+              >
+                Add to Cart
+              </Button>
+            </Card>
            </Grid> 
          ))}
        </Grid>
