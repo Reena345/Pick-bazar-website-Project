@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   FormControl,
+  Menu,
   MenuItem,
   Select,
   Toolbar,
@@ -22,21 +23,65 @@ import MedicationIcon from "@mui/icons-material/Medication";
 import BrushIcon from "@mui/icons-material/Brush";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
-import LoginPage from "../Forms/LoginPage/LoginPage";
-import RegisterPage from "../Forms/RegisterPage/RegisterPage";
+import AuthModal from "../Forms/LoginPage/LoginPage";
+import accountProfile from "../../assits/acount-profile.webp"
 
+
+
+import { ToastContainer } from 'react-toastify';
+import {  useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
 const Header = () => {
   const [product, setProduct] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => setIsModalOpen(true);
+  // const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
 
   const handleChange = (event) => {
     setProduct(event.target.value);
   };
-
+  const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [user, setUser] = useState();
+  console.log(user, 'user');
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+      setAnchorEl(null);
+  };
+  useEffect(() => {
+      const loggedInUser = JSON.parse(localStorage.getItem('users'));
+      console.log(loggedInUser, 'loggedInUser');
+      if (loggedInUser) {
+          setUser(loggedInUser);
+      }
+  }, []);
+  const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleLogout = () => {
+      localStorage.removeItem('loggedInUser');
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("userPassword");
+      setUser(null);
+      navigate('/');
+  };
   
   return (
     <Box>
@@ -120,21 +165,76 @@ const Header = () => {
                 Pages
               </Typography>
             </Box>
-            <Box className="d-flex">
-              <Button
-                className="text-white mx-4 bg-success"
-                onClick={handleOpenModal}
-              >
-                Join
-              </Button>
-              <Button className="text-white mx-4 bg-success d-none d-sm-none d-md-block">
-                Become a Seller
-              </Button>
-            </Box>
-          </Box>
-        </Toolbar>
+          
+       
+       
+       
+                    {user ? (
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Button
+
+                                id="basic-button"
+                                aria-controls={open ? 'basic-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
+                                onClick={handleClick}
+                            >
+                                <img className='' src={accountProfile} alt="" srcset="" width={40} />
+                            </Button>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button',
+                                }}
+                            >
+                                <MenuItem onClick={handleClose}><Link to='/ProfileDashboard'>Profile</Link> </MenuItem>
+                                <MenuItem onClick={handleClose}>My account</MenuItem>
+                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                            </Menu>
+
+                        </Box>
+                    ) : (
+                        <Button
+                            sx={{
+                                textTransform: 'none',
+                                background: '#019376',
+                                color: 'white',
+                                display: { xs: 'none', md: 'flex' },
+                                '&:hover': { background: '#017a5f' },
+                            }}
+                            variant="contained"
+                            onClick={handleOpenModal}
+                        >
+                            Join
+                        </Button>
+                    )}
+
+                    <Button
+                        variant="contained"
+                        sx={{
+                            textTransform: 'none',
+                            background: '#019376',
+                            display: { xs: 'none', sm: 'flex' },
+                        }}
+                    >
+                        Become a Seller
+                    </Button>
+              
+
+                <AuthModal
+                    openModal={openModal}
+                    setOpenModal={setOpenModal}
+                    isRegister={isRegister}
+                    setIsRegister={setIsRegister}
+                />
+                <ToastContainer />
+                </Box>
+                </Toolbar>
+
       </AppBar>
-      <RegisterPage open={isModalOpen} onClose={handleCloseModal} />
     </Box>
   );
 };

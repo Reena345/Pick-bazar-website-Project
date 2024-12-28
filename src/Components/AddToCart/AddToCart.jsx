@@ -14,7 +14,6 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import {
-  addToCart,
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
@@ -28,14 +27,14 @@ const AddToCart = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // Recalculate total price whenever cart changes or quantity changes
+  
   useEffect(() => {
     const calculatedTotalPrice = cart.reduce(
       (sum, itemProduct) => sum + itemProduct.price * itemProduct.quantity,
       0
     );
-    setTotalPrice(calculatedTotalPrice); // Update total price when cart changesF
-  }, [cart]); // Dependency on cart to re-run when cart updates
+    setTotalPrice(calculatedTotalPrice); 
+  }, [cart]); 
 
   const cartContent = () => (
     <Box
@@ -77,33 +76,44 @@ const AddToCart = () => {
                 py: 1,
               }}
             >
-              <Typography sx={{ fontWeight: "bold" }}>
-                {product.price}
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box className="bg-body-secondary rounded-4 me-3">
                 <Button
                   sx={{ minWidth: 30, height: 30 }}
-                  variant="outlined"
+                  variant=""
                   onClick={() => dispatch(decreaseQuantity(product.id))}
                 >
                   -
                 </Button>
-                <Typography sx={{ mx: 1, fontWeight: "bold" }}>
+                <Typography sx={{ mx: 2, fontWeight: "bold" }}>
                   {product.quantity}
                 </Typography>
                 <Button
                   sx={{ minWidth: 30, height: 30 }}
-                  variant="outlined"
+                  variant=""
                   onClick={() => dispatch(increaseQuantity(product.id))}
                 >
                   +
                 </Button>
               </Box>
-              <Typography
-                sx={{ color: "#019376", fontWeight: "bold", fontSize: "14px" }}
-              >
-                ${product.price} x {product.quantity} = $
-                {product.price * product.quantity}
+              <img
+                src={product.img}
+                alt={product.name}
+                style={{ width: "50px", height: "50px", borderRadius: "5px" }}
+              />
+              <Box sx={{ flexGrow: 1, mx: 2 }}>
+                <Typography className="fs-6 fw-bold ">
+                  {product.title}
+                </Typography>
+                <Typography className="fs-6 fw-bold text-success" >
+                  ${product.price.toFixed(2)}
+                </Typography>
+                <Typography variant="body2" sx={{ color: "gray" }}>
+                  {product.quantity} X 1pc(s)
+                </Typography>
+              </Box>
+
+              <Typography sx={{ fontWeight: "bold" }}>
+                ${(product.price * product.quantity).toFixed(2)}
               </Typography>
               <IconButton
                 onClick={() => dispatch(removeFromCart(product.id))}
@@ -116,7 +126,7 @@ const AddToCart = () => {
         ) : (
           <Typography
             variant="body1"
-            sx={{ textAlign: "center", fontWeight: "bold" }}
+            sx={{ textAlign: "center", fontWeight: "bold", mt: 2 }}
           >
             No products in the cart
           </Typography>
@@ -163,36 +173,35 @@ const AddToCart = () => {
   return (
     <Box>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, p: 3 }}>
-      {products.map((product) => {
-  // Log the product image URL and check if it's correct
-  console.log("Product", product);
+        {products.map((product) => {
 
-  return (
-    <Card key={product.id} sx={{ width: 300 }}>
-      <CardContent>
-        <img
-          src={product.img}
-          alt={product.title} // Providing meaningful alt text
-          style={{
-            width: "100%", // Ensuring the image fits the card width
-            height: "auto", // Keeping aspect ratio intact
-            objectFit: "cover", // Cover the image space without distortion
-          }}
-        />
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-          {product.title}
-        </Typography>
-        <Typography variant="body1" sx={{ color: "#019376" }}>
-          ${product.price}
-        </Typography>
-      </CardContent>
-      <CardActions></CardActions>
-    </Card>
-  );
-})}
+          return (
+            <Card key={product.id} sx={{ width: 300 }}>
+              <CardContent>
+                <img
+                  src={product.img}
+                  alt={product.title} 
+                  style={{
+                    width: "100%", 
+                    height: "auto",
+                    objectFit: "cover", 
+                  }}
+                />
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  {product.title}
+                </Typography>
+                <Typography variant="body1" sx={{ color: "#019376" }}>
+                  ${product.price}
+                </Typography>
+              </CardContent>
+              <CardActions></CardActions>
+            </Card>
+          );
+        })}
       </Box>
 
       <Button
+        className="bg-success"
         sx={{ position: "fixed", top: "50%", right: "10px", zIndex: 1000 }}
         onClick={() => setDrawerOpen(true)}
         variant="contained"

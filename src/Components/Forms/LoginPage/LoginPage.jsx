@@ -1,212 +1,238 @@
-import React from 'react'
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
+  Modal,
+  Box,
+  Typography,
   TextField,
+  Button,
+  Stack,
+  InputAdornment,
 } from "@mui/material";
-import {
-  BorderOuterRounded,
-  Email,
-  Password,
-  Visibility,
-  VisibilityOff,
-} from "@mui/icons-material";
-import { useForm, Controller } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import logo from "../../../assits/Logo-new.webp";
-import { Link } from 'react-router-dom';
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom"; 
+import Logo from "../../../assits/Logo-new.webp";
 
-const LoginPage = () => {
-
-    const [showPassword, setShowPassword] = useState(false);
-    const schema = yup.object({
-      email: yup.string().required("Your email  is Required"),
-      password: yup
-        .string()
-        .min(8, "Password must be 8 characters long")
-        .matches(/[0-9]/, "Password requires a number")
-        .matches(/[a-z]/, "Password requires a lowercase letter")
-        .matches(/[A-Z]/, "Password requires an uppercase letter")
-        .matches(/[^\w]/, "Password requires a symbol")
-        .required("Password  is Required"),
-       
-    });
-    
-    const signUpValue = {
-      email: "",
-      password: "",
-    };
-    const {
-      control,
-      handleSubmit,
-      reset,
-      formState: { errors },
-      
-    } = useForm({
-      defaultValues: signUpValue,
-      resolver: yupResolver(schema),
-      
-    });
-    const signUp = (data) => {
-      console.log(data);
-      reset();
-      
-    };
-    console.log(errors, "");
-
-
-const style = {
+const modalStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
+  width: 400,
   bgcolor: "background.paper",
-  border: "0px solid #000",
-  borderRadius: 5,
   boxShadow: 24,
   p: 4,
+  borderRadius: 2,
 };
 
-  return (
-    <div>
-    <Modal
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={style}>
-        <div className="container mt-2">
-          <Grid container>
-            <Grid item sx={12} sm={12} md={12} className="text-center"></Grid>
-            <Grid item sx={12} sm={12} md={12}>
-              <Box>
-                <Box className="text-center mb-4 align-items-center ms-3 ">
-                  <img
-                    className=" ms-5 ps-5 img-fluid  mb-3"
-                    src={logo}
-                    alt=""
-                  />
-                  <Typography variant="body-2">
-                    By signing up, you agree to our{" "}
-                    <a className="text-success" href="">
-                      terms
-                    </a>{" "}
-                    &{" "}
-                    <a className="text-success" href="">
-                      policy
-                    </a>
-                  </Typography>
-                </Box>
-                <form onSubmit={handleSubmit(signUp)}>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <InputLabel htmlFor="component-simple">
-                        Email
-                      </InputLabel>
-                      <Controller
-                        name="email"
-                        control={control}
-                        render={({ field }) => (
-                          <TextField
-                            type="email"
-                            fullWidth
-                            size="small"
-                            {...field}
-                          />
-                        )}
-                      />
-                      <p className="text-danger">{errors?.email?.message}</p>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <InputLabel htmlFor="component-simple">
-                        Password
-                      </InputLabel>
-                      <Controller
-                        name="password"
-                        control={control}
-                        render={({ field }) => (
-                          <OutlinedInput
-                            {...field}
-                            fullWidth
-                            size="small"
-                            id="outlined-adornment-weight"
-                            type={showPassword ? "text" : "password"}
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <IconButton
-                                  aria-label={
-                                    showPassword
-                                      ? "hide the password"
-                                      : "display the password"
-                                  }
-                                  edge="end"
-                                  onClick={() => {
-                                    setShowPassword(!showPassword);
-                                  }}
-                                >
-                                  {showPassword ? (
-                                    <VisibilityOff />
-                                  ) : (
-                                    <Visibility />
-                                  )}
-                                </IconButton>
-                              </InputAdornment>
-                            }
-                            aria-describedby="outlined-weight-helper-text"
-                            inputProps={{
-                              "aria-label": "weight",
-                            }}
-                          />
-                        )}
-                      />
-                      <p className="text-danger">
-                        {errors?.password?.message}
-                      </p>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button
-                        type="submit"
-                        className="bg-success"
-                        variant="contained"
-                        fullWidth
-                      >
-                        Register
-                      </Button>
-                    </Grid>
-                    <Box>
-                      <hr />
-                    </Box>
-                    <Box className="ms-3 mt-5">
-                      <Typography
-                        variant="body"
-                        className=" ms-5 ps-5  text-center"
-                      >
-                        Don't have any account?
-                        
-                        <Link to='/RegisterPage'>Login</Link>  
-                        
-                      </Typography>
-                    </Box>
-                  </Grid>
-                </form>
-              </Box>
-            </Grid>
-          </Grid>
-        </div>
-      </Box>
-      
-    </Modal>
-  </div>
-  )
-}
+export default function AuthModal({ openModal, setOpenModal }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-export default LoginPage
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate(); 
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required.";
+    }
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required.";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters.";
+    }
+    return newErrors;
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(
+      (user) =>
+        user.email === formData.email && user.password === formData.password
+    );
+
+    if (user) {
+      alert("Login successful!");
+      handleClose(); 
+      navigate("/"); 
+    } else {
+      alert("Invalid credentials. Please register first.");
+    }
+
+    setErrors({});
+    setFormData({ email: "", password: "" });
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push(formData);
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Registration successful! Please log in.");
+    setIsRegister(false);
+
+    setErrors({});
+    setFormData({ email: "", password: "" });
+  };
+
+  const toggleForm = () => {
+    setIsRegister((prev) => !prev);
+    setFormData({ email: "", password: "" });
+    setErrors({});
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  return (
+    <Modal open={openModal} onClose={handleClose}>
+      <Box sx={modalStyle}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+          className="my-4 pb-3"
+        >
+          <img src={Logo} alt="PickBazar Logo" style={{ height: 40 }} />
+          <Typography variant="h6" sx={{ fontWeight: "bold", color: "#333" }}>
+            PickBazar
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mt: 1, color: "#666" }}>
+            {isRegister
+              ? "Create an account to get started"
+              : "Login with your email & password"}
+          </Typography>
+        </Box>
+
+        <Stack
+          spacing={2}
+          component="form"
+          noValidate
+        >
+          <TextField
+            type="email"
+            fullWidth
+            placeholder="Enter Email"
+            size="small"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            error={!!errors.email}
+            helperText={errors.email}
+          />
+          <TextField
+            fullWidth
+            placeholder="Enter Password"
+            size="small"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            error={!!errors.password}
+            helperText={errors.password}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Button
+                    onClick={() => setShowPassword(!showPassword)}
+                    sx={{ minWidth: 0, padding: 0 }}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </Button>
+                </InputAdornment>
+              ),
+            }}
+          />
+          {isRegister ? (
+            <Button
+              type="submit"
+              variant="contained"
+              color="success"
+              fullWidth
+              onClick={handleRegister}
+              sx={{ textTransform: "none" }}
+            >
+              Register
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              variant="contained"
+              color="success"
+              fullWidth
+              onClick={handleLogin}
+              sx={{ textTransform: "none" }}
+            >
+              Login
+            </Button>
+          )}
+          <Typography align="center" variant="body2">
+            OR
+          </Typography>
+          {!isRegister && (
+            <Button
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              sx={{ textTransform: "none" }}
+            >
+              Login with Mobile Number
+            </Button>
+          )}
+          {!isRegister && (
+            <Button
+              variant="outlined"
+              color="primary"
+              fullWidth
+              sx={{ textTransform: "none" }}
+            >
+              Login with Google
+            </Button>
+          )}
+          <Typography align="center" sx={{ mt: 2 }}>
+            {isRegister ? (
+              <>
+                Already have an account?{" "}
+                <Button onClick={toggleForm} sx={{ textDecoration: "none" }}>
+                  Login
+                </Button>
+              </>
+            ) : (
+              <>
+                Don’t have an account?{" "}
+                <Button onClick={toggleForm} sx={{ textDecoration: "none" }}>
+                  Register
+                </Button>
+              </>
+            )}
+          </Typography>
+        </Stack>
+      </Box>
+    </Modal>
+  );
+}

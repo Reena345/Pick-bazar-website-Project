@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Card,  Grid, Typography } from "@mui/material";
+import { Box, Button, Card, Grid, Typography } from "@mui/material";
 
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
@@ -39,8 +39,6 @@ import Mixbiscuits30 from "../../assits/Mix biscuits 6.webp";
 import { addToCart } from "../../cartSlice";
 import { useDispatch } from "react-redux";
 
-
-
 const copyProduct = [
   {
     id: 1,
@@ -54,222 +52,217 @@ const copyProduct = [
     img: Biscuit2,
     Category: "Nuts & Biscuits",
     title: "Belmont Custard ",
-    price:  0.8,
+    price: 0.8,
   },
   {
     id: 3,
     img: Biscuit3,
     Category: "Nuts & Biscuits",
     title: "Crawford Digestives",
-    price:  10,
+    price: 10,
   },
   {
     id: 4,
     img: Biscuit4,
     Category: "Nuts & Biscuits",
     title: "Jammie Dodgers Raspberry",
-    price:  14,
+    price: 14,
   },
   {
     id: 5,
     img: Biscuit5,
     Category: "Nuts & Biscuits",
     title: "Crawford Shortie",
-    price: "$ 25",
+    price: 25,
   },
   {
     id: 6,
     img: Biscuit6,
     Category: "Nuts & Biscuits",
     title: "Lotus Biscoff",
-    price: "$ 2.5",
+    price: 2.5,
   },
   {
     id: 7,
     img: Chocolate7,
     Category: "Chocolates",
     title: "Filipinos",
-    price: "$ 5.5",
+    price: 5.5,
   },
   {
     id: 8,
     img: Chocolate8,
     Category: "Chocolates",
     title: "Dairy Milk Reclose",
-    price: "$ 5.7",
+    price: 5.7,
   },
   {
     id: 9,
     img: Chocolate9,
     Category: "Chocolates",
     title: "Cloetta Sprinkle",
-    price: "$ 5.25",
+    price: 5.25,
   },
   {
     id: 10,
     img: Chocolate10,
     Category: "Chocolates",
     title: "Cloetta Chocowoffle Crispy",
-    price: "$ 6.5",
+    price: 6.5,
   },
   {
     id: 11,
     img: Chocolate11,
     Category: "Chocolates",
     title: "Cadbury Zip",
-    price: "$ 5.75",
+    price: 5.75,
   },
   {
     id: 12,
     img: Chocolate12,
     Category: "Chocolates",
     title: "Dairy Milk Crispello",
-    price: "$ 3.5",
+    price: 3.5,
   },
   {
     id: 13,
     img: Chocolatemix13,
     Category: "Crisps",
     title: "Snikers Snack Size",
-    price: "$ 4.25",
+    price: 4.25,
   },
   {
     id: 14,
     img: Chocolatemix14,
     Category: "Crisps",
     title: "Snikers Slice",
-    price: "$ 7.25",
+    price: 7.25,
   },
   {
     id: 15,
     img: Chocolatemix15,
     Category: "Crisps",
     title: "M & M Funsize",
-    price: "$ 8.5",
+    price: 8.5,
   },
   {
     id: 16,
     img: Chocolatemix16,
     Category: "Crisps",
     title: "Hersheys Kisses",
-    price: "$ 9.5",
+    price: 9.5,
   },
   {
     id: 17,
     img: Chocolatemix17,
     Category: "Crisps",
     title: "Nestle Kitkat",
-    price: "$ 10.5",
+    price: 10.5,
   },
   {
     id: 18,
     img: Chocolatemix18,
     Category: "Crisps",
     title: "Nestle Butterfinger",
-    price: "$ 0.5",
+    price: 0.5,
   },
   {
     id: 19,
     img: lays19,
     Category: "Puzzles lays",
     title: "Lays Baked",
-    price: "$ 2.25",
+    price: 2.25,
   },
   {
     id: 20,
     img: lays20,
     Category: "Puzzles lays",
     title: "Lays Sea Salted",
-    price: "$ 8.75",
+    price: 8.75,
   },
   {
     id: 21,
     img: lays21,
     Category: "Puzzles lays",
     title: "Lays Sour Cream",
-    price: "$ 6.25",
+    price: 6.25,
   },
   {
     id: 22,
     img: lays22,
     Category: "Puzzles lays",
     title: "Snack Rite Ready Saled",
-    price: "$ 3.75",
+    price: 3.75,
   },
   {
     id: 23,
     img: lays23,
     Category: "Puzzles lays",
     title: "Nims Apple Crisp",
-    price: "$ 8.5",
+    price: 8.5,
   },
   {
     id: 24,
     img: lays24,
     Category: "Puzzles lays",
     title: "Snack Rite Ready Saled",
-    price: "$ 5.25",
+    price: 5.25,
   },
   {
     id: 25,
     img: Mixbiscuits25,
     Category: "Snacks ",
     title: "Hill Mini Pack Mix",
-    price: "$ 1.75",
+    price: 1.75,
   },
   {
     id: 26,
     img: Mixbiscuits26,
     Category: "Snacks",
     title: "Khong Guan Premium Marie",
-    price: "$ 5.5",
+    price: 5.5,
   },
   {
     id: 27,
     img: Mixbiscuits27,
     Category: "Snacks",
     title: "Jammie Dodgers Raspberry",
-    price: "$ 7,25",
+    price: 7.25,
   },
   {
     id: 28,
     img: Mixbiscuits28,
     Category: "Snacks",
     title: "Puzzles Crips Ready Salted",
-    price: "$ 8.75",
+    price: 8.75,
   },
   {
     id: 29,
     img: Mixbiscuits29,
     Category: "Snacks",
     title: "Doritos Tangy Cheese",
-    price: "$ 6.75",
+    price: 6.75,
   },
   {
     id: 30,
     img: Mixbiscuits30,
     category: "Snacks",
     title: "Lays Kettle Cooked",
-    price: "$ 10.25",
+    price: 10.25,
   },
 ];
 
-
-
 const Products = () => {
-  const navigate = useNavigate(); 
-    // State for selected category
-    const [selectedCategory, setSelectedCategory] = useState("");
-  
-    // Filtered products based on selected category
-    const filteredProducts = selectedCategory
-      ? copyProduct.filter((product) => product.Category === selectedCategory)
-      : copyProduct;
-      const dispatch = useDispatch();
-  
-
-
+  const navigate = useNavigate();
  
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  
+  const filteredProducts = selectedCategory
+    ? copyProduct.filter((product) => product.Category === selectedCategory)
+    : copyProduct;
+  const dispatch = useDispatch();
+
   return (
     <Box className="d-flex bg-body-tertiary my-5 ">
       <Box className=" mt-3 justify-content-between ">
@@ -278,40 +271,84 @@ const Products = () => {
           sx={{
             marginRight: "30px",
             width: "250px",
-            height:'400px',
+            height: "400px",
             backgroundColor: "#fff",
             padding: 2,
             borderRadius: "8px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <Box> <Button className="text-black  " onClick={() => setSelectedCategory("")}>All Product</Button></Box>
-         <Box> <Button className=" text-black" onClick={() => setSelectedCategory("Nuts & Biscuits")}>Nuts & Biscuits</Button></Box>
-         <Box> <Button className=" text-black" onClick={() => setSelectedCategory("Chocolates")}>Chocolates</Button></Box>
-         <Box> <Button className=" text-black" onClick={() => setSelectedCategory("Crisps")}>Crisps</Button></Box>
-         <Box> <Button className=" text-black" onClick={() => setSelectedCategory("Puzzles lays")}>Puzzles lays</Button></Box>
-        
+          <Box>
+            {" "}
+            <Button
+              className="text-black  "
+              onClick={() => setSelectedCategory("")}
+            >
+              All Product
+            </Button>
+          </Box>
+          <Box>
+            {" "}
+            <Button
+              className=" text-black"
+              onClick={() => setSelectedCategory("Nuts & Biscuits")}
+            >
+              Nuts & Biscuits
+            </Button>
+          </Box>
+          <Box>
+            {" "}
+            <Button
+              className=" text-black"
+              onClick={() => setSelectedCategory("Chocolates")}
+            >
+              Chocolates
+            </Button>
+          </Box>
+          <Box>
+            {" "}
+            <Button
+              className=" text-black"
+              onClick={() => setSelectedCategory("Crisps")}
+            >
+              Crisps
+            </Button>
+          </Box>
+          <Box>
+            {" "}
+            <Button
+              className=" text-black"
+              onClick={() => setSelectedCategory("Puzzles lays")}
+            >
+              Puzzles lays
+            </Button>
+          </Box>
         </Box>
       </Box>
       <Grid container className=" mt-3">
         {filteredProducts?.map((copyProduct, index) => (
-       <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}> 
-       <Card
+          <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>
+            <Card
               sx={{
                 margin: "10px",
                 padding: "10px",
                 backgroundColor: "#fff",
                 borderRadius: "8px",
                 boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                maxHeight: "550px",
+                minHeight: "320px",
+                display: "flex",
+                flexDirection: "column", 
+                justifyContent: "space-between", 
               }}
             >
               <Box sx={{ textAlign: "center" }}>
                 <img
                   src={copyProduct.img}
                   alt={copyProduct.title}
-                  onClick={() => { 
+                  onClick={() => {
                     navigate(`/ProductsDetails/${copyProduct?.id}`);
-                    }}
+                  }}
                   style={{
                     width: "100%",
                     maxHeight: "150px",
@@ -327,28 +364,37 @@ const Products = () => {
                 <Typography variant="body2" color="text.secondary">
                   {copyProduct.Category}
                 </Typography>
-                <Typography variant="h6" color="primary">
-                  {copyProduct.price}
-                </Typography>
               </Box>
-              <Button
-                variant="contained"
-                startIcon={<ShoppingBasketIcon />}
+              <Box
                 sx={{
-                  width: "100%",
-                  backgroundColor: "#007BFF",
-                  color: "#fff",
-                  marginTop: "10px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "10px 0 0", 
                 }}
-                onClick={() => dispatch(addToCart(copyProduct))}
               >
-                Add to Cart
-              </Button>
+                <Typography className="text-success" variant="h6">
+                  ${copyProduct.price}
+                </Typography>
+                <Button
+                  className="bg-success rounded-5"
+                  variant="contained"
+                  startIcon={<ShoppingBasketIcon />}
+                  sx={{
+                    width: "50%",
+                    backgroundColor: "#007BFF",
+                    color: "#fff",
+                  }}
+                  onClick={() => dispatch(addToCart(copyProduct))}
+                >
+                  Cart
+                </Button>
+              </Box>
             </Card>
-           </Grid> 
-         ))}
-       </Grid>
-     </Box>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 export default Products;

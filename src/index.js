@@ -8,6 +8,8 @@ import LoginPage from "./Components/Forms/LoginPage/LoginPage";
 import ProductsDetails from "./Components/ProductsDetails/ProductsDetails";
 import { Provider } from "react-redux";
 import  store from "./store";
+import ProfileDashboard from "./Components/MyAcount/MyAcount";
+import ChangePassword from "./Components/MyAcount/ChangePassword";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "/ProductsDetails/:id",
         element: <ProductsDetails />,
+      },
+      {
+        path: "/ProfileDashboard",
+        element: <ProfileDashboard />,
+      },
+      {
+        path: "/ChangePassword",
+        element: <ChangePassword />,
       },
     ],
   },
