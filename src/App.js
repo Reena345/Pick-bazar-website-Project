@@ -8,6 +8,7 @@ import HeroSection from './Components/Hero-section/HeroSection';
 import DeliveryProduct from './Components/Delivery/DeliveryProduct';
 import Products from './Components/Products/Products';
 import AddToCart from './Components/AddToCart/AddToCart';
+import FilterMenu from './Components';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <DeliveryProduct />
       <Products />
        < AddToCart/> 
+       < FilterMenu/> 
     </div>
   );
 }

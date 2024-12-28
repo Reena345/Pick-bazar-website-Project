@@ -24,31 +24,14 @@ import BrushIcon from "@mui/icons-material/Brush";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import AuthModal from "../Forms/LoginPage/LoginPage";
-import accountProfile from "../../assits/acount-profile.webp"
+import accountProfile from "../../assits/acount-profile.webp";
 
+import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-
-import { ToastContainer } from 'react-toastify';
-import {  useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
-
- 
- 
- 
- 
-
- 
- 
- 
- 
 const Header = () => {
-  const [product, setProduct] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-
+  const [product, setProduct] = useState("")
 
   const handleChange = (event) => {
     setProduct(event.target.value);
@@ -58,31 +41,31 @@ const Header = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [user, setUser] = useState();
-  console.log(user, 'user');
+  console.log(user, "user");
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
-      setAnchorEl(null);
+    setAnchorEl(null);
   };
   useEffect(() => {
-      const loggedInUser = JSON.parse(localStorage.getItem('users'));
-      console.log(loggedInUser, 'loggedInUser');
-      if (loggedInUser) {
-          setUser(loggedInUser);
-      }
+    const loggedInUser = JSON.parse(localStorage.getItem("users"));
+    console.log(loggedInUser, "loggedInUser");
+    if (loggedInUser) {
+      setUser(loggedInUser);
+    }
   }, []);
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleOpenModal = () => setOpenModal(true);
   const handleLogout = () => {
-      localStorage.removeItem('loggedInUser');
-      localStorage.removeItem("userEmail");
-      localStorage.removeItem("userPassword");
-      setUser(null);
-      navigate('/');
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userPassword");
+    setUser(null);
+    navigate("/");
   };
-  
+
   return (
     <Box>
       <AppBar className=" bg-white " position="static">
@@ -93,6 +76,7 @@ const Header = () => {
                 {" "}
                 <FormatAlignLeftIcon />
               </Box>
+              
               <img className=" img-fluid w-75 h-75 me-5" src={logo} alt="" />
             </Box>
 
@@ -165,75 +149,75 @@ const Header = () => {
                 Pages
               </Typography>
             </Box>
-          
-       
-       
-       
-                    {user ? (
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Button
+            {user ? (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <img
+                    className=""
+                    src={accountProfile}
+                    alt=""
+                    srcset=""
+                    width={40}
+                  />
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <Link to="/ProfileDashboard">Profile</Link>{" "}
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </Box>
+            ) : (
+              <Button className="me-2"
+                sx={{
+                  textTransform: "none",
+                  background: "#019376",
+                  color: "white",
+                  display: { xs: "none", md: "flex" },
+                  "&:hover": { background: "#017a5f" },
+                }}
+                variant="contained"
+                onClick={handleOpenModal}
+              >
+                Join
+              </Button>
+            )}
 
-                                id="basic-button"
-                                aria-controls={open ? 'basic-menu' : undefined}
-                                aria-haspopup="true"
-                                aria-expanded={open ? 'true' : undefined}
-                                onClick={handleClick}
-                            >
-                                <img className='' src={accountProfile} alt="" srcset="" width={40} />
-                            </Button>
-                            <Menu
-                                id="basic-menu"
-                                anchorEl={anchorEl}
-                                open={open}
-                                onClose={handleClose}
-                                MenuListProps={{
-                                    'aria-labelledby': 'basic-button',
-                                }}
-                            >
-                                <MenuItem onClick={handleClose}><Link to='/ProfileDashboard'>Profile</Link> </MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                            </Menu>
+            <Button
+              variant="contained"
+              sx={{
+                textTransform: "none",
+                background: "#019376",
+                display: { xs: "none", sm: "flex" },
+              }}
+            >
+              Become a Seller
+            </Button>
 
-                        </Box>
-                    ) : (
-                        <Button
-                            sx={{
-                                textTransform: 'none',
-                                background: '#019376',
-                                color: 'white',
-                                display: { xs: 'none', md: 'flex' },
-                                '&:hover': { background: '#017a5f' },
-                            }}
-                            variant="contained"
-                            onClick={handleOpenModal}
-                        >
-                            Join
-                        </Button>
-                    )}
-
-                    <Button
-                        variant="contained"
-                        sx={{
-                            textTransform: 'none',
-                            background: '#019376',
-                            display: { xs: 'none', sm: 'flex' },
-                        }}
-                    >
-                        Become a Seller
-                    </Button>
-              
-
-                <AuthModal
-                    openModal={openModal}
-                    setOpenModal={setOpenModal}
-                    isRegister={isRegister}
-                    setIsRegister={setIsRegister}
-                />
-                <ToastContainer />
-                </Box>
-                </Toolbar>
-
+            <AuthModal
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+              isRegister={isRegister}
+              setIsRegister={setIsRegister}
+            />
+            <ToastContainer />
+          </Box>
+        </Toolbar>
       </AppBar>
     </Box>
   );
