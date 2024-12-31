@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Card, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  FormControl,
+  Grid,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
@@ -254,146 +263,179 @@ const copyProduct = [
 
 const Products = () => {
   const navigate = useNavigate();
- 
+
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  
   const filteredProducts = selectedCategory
     ? copyProduct.filter((product) => product.Category === selectedCategory)
     : copyProduct;
   const dispatch = useDispatch();
 
   return (
-    <Box className="d-flex bg-body-tertiary my-5 ">
-      <Box className=" mt-3 justify-content-between ">
-        <Box
-          className="d-none d-sm-none d-md-none d-lg-block"
+    <Box>
+      <FormControl className="d-block d-sm-block d-md-block d-lg-none" sx={{ m: 1, minWidth: 150 }}>
+        <Select
+          size="small"
+          value={selectedCategory}
+          onChange={(event) => setSelectedCategory(event.target.value)}
+          displayEmpty
+          inputProps={{ "aria-label": "Select Category"  }}
           sx={{
-            marginRight: "30px",
-            width: "250px",
-            height: "400px",
             backgroundColor: "#fff",
-            padding: 2,
             borderRadius: "8px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            padding: "10px",
+          
           }}
         >
-          <Box>
-            {" "}
-            <Button
-              className="text-black  "
-              onClick={() => setSelectedCategory("")}
-            >
-              All Product
-            </Button>
-          </Box>
-          <Box>
-            {" "}
-            <Button
-              className=" text-black"
-              onClick={() => setSelectedCategory("Nuts & Biscuits")}
-            >
-              Nuts & Biscuits
-            </Button>
-          </Box>
-          <Box>
-            {" "}
-            <Button
-              className=" text-black"
-              onClick={() => setSelectedCategory("Chocolates")}
-            >
-              Chocolates
-            </Button>
-          </Box>
-          <Box>
-            {" "}
-            <Button
-              className=" text-black"
-              onClick={() => setSelectedCategory("Crisps")}
-            >
-              Crisps
-            </Button>
-          </Box>
-          <Box>
-            {" "}
-            <Button
-              className=" text-black"
-              onClick={() => setSelectedCategory("Puzzles lays")}
-            >
-              Puzzles lays
-            </Button>
+          <MenuItem value="">
+            <span className="text-black">All Product</span>
+          </MenuItem>
+          <MenuItem value="Nuts & Biscuits">
+            <span className="text-black">Nuts & Biscuits</span>
+          </MenuItem>
+          <MenuItem value="Chocolates">
+            <span className="text-black">Chocolates</span>
+          </MenuItem>
+          <MenuItem value="Crisps">
+            <span className="text-black">Crisps</span>
+          </MenuItem>
+          <MenuItem value="Puzzles lays">
+            <span className="text-black">Puzzles lays</span>
+          </MenuItem>
+        </Select>
+      </FormControl>
+      <Box className="d-flex bg-body-tertiary my-5 ">
+        <Box className=" mt-3 justify-content-between ">
+          <Box
+            className="d-none d-sm-none d-md-none d-lg-block"
+            sx={{
+              marginRight: "30px",
+              width: "250px",
+              height: "400px",
+              backgroundColor: "#fff",
+              padding: 2,
+              borderRadius: "8px",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <Box>
+              {" "}
+              <Button
+                className="text-black  "
+                onClick={() => setSelectedCategory("")}
+              >
+                All Product
+              </Button>
+            </Box>
+            <Box>
+              {" "}
+              <Button
+                className=" text-black"
+                onClick={() => setSelectedCategory("Nuts & Biscuits")}
+              >
+                Nuts & Biscuits
+              </Button>
+            </Box>
+            <Box>
+              {" "}
+              <Button
+                className=" text-black"
+                onClick={() => setSelectedCategory("Chocolates")}
+              >
+                Chocolates
+              </Button>
+            </Box>
+            <Box>
+              {" "}
+              <Button
+                className=" text-black"
+                onClick={() => setSelectedCategory("Crisps")}
+              >
+                Crisps
+              </Button>
+            </Box>
+            <Box>
+              {" "}
+              <Button
+                className=" text-black"
+                onClick={() => setSelectedCategory("Puzzles lays")}
+              >
+                Puzzles lays
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Box>
-      <Grid container className=" mt-3">
-        {filteredProducts?.map((copyProduct, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>
-            <Card
-              sx={{
-                margin: "10px",
-                padding: "10px",
-                backgroundColor: "#fff",
-                borderRadius: "8px",
-                boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-                maxHeight: "550px",
-                minHeight: "320px",
-                display: "flex",
-                flexDirection: "column", 
-                justifyContent: "space-between", 
-              }}
-            >
-              <Box sx={{ textAlign: "center" }}>
-                <img
-                  src={copyProduct.img}
-                  alt={copyProduct.title}
-                  onClick={() => {
-                    navigate(`/ProductsDetails/${copyProduct?.id}`);
-                  }}
-                  style={{
-                    width: "100%",
-                    maxHeight: "150px",
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                  }}
-                />
-              </Box>
-              <Box sx={{ padding: "10px" }}>
-                <Typography variant="h6" component="div">
-                  {copyProduct.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {copyProduct.Category}
-                </Typography>
-              </Box>
-              <Box
+        <Grid container className=" mt-3">
+          {filteredProducts?.map((copyProduct, index) => (
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>
+              <Card
                 sx={{
+                  margin: "10px",
+                  padding: "10px",
+                  backgroundColor: "#fff",
+                  borderRadius: "8px",
+                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  maxHeight: "550px",
+                  minHeight: "320px",
                   display: "flex",
+                  flexDirection: "column",
                   justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "10px 0 0", 
                 }}
               >
-                <Typography className="text-success" variant="h6">
-                  ${copyProduct.price}
-                </Typography>
-                <Button
-                  className="bg-success rounded-5"
-                  variant="contained"
-                  startIcon={<ShoppingBasketIcon />}
+                <Box sx={{ textAlign: "center" }}>
+                  <img
+                    src={copyProduct.img}
+                    alt={copyProduct.title}
+                    onClick={() => {
+                      navigate(`/ProductsDetails/${copyProduct?.id}`);
+                    }}
+                    style={{
+                      width: "100%",
+                      maxHeight: "150px",
+                      objectFit: "cover",
+                      borderRadius: "8px",
+                    }}
+                  />
+                </Box>
+                <Box sx={{ padding: "10px" }}>
+                  <Typography variant="h6" component="div">
+                    {copyProduct.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {copyProduct.Category}
+                  </Typography>
+                </Box>
+                <Box
                   sx={{
-                    width: "50%",
-                    backgroundColor: "#007BFF",
-                    color: "#fff",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "10px 0 0",
                   }}
-                  onClick={() => dispatch(addToCart(copyProduct))}
                 >
-                  Cart
-                </Button>
-              </Box>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                  <Typography className="text-success" variant="h6">
+                    ${copyProduct.price}
+                  </Typography>
+                  <Button
+                    className="bg-success rounded-5"
+                    variant="contained"
+                    startIcon={<ShoppingBasketIcon />}
+                    sx={{
+                      width: "50%",
+                      backgroundColor: "#007BFF",
+                      color: "#fff",
+                    }}
+                    onClick={() => dispatch(addToCart(copyProduct))}
+                  >
+                    Cart
+                  </Button>
+                </Box>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 };
