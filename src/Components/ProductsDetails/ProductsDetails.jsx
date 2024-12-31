@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   Box,
-  Card,
-  CardContent,
   CardMedia,
   Typography,
   Grid,
 } from "@mui/material";
 
-// Image imports
+// Import image from file
 import Biscuit1 from "../../assits/Biscuit 1.webp";
 import Biscuit2 from "../../assits/Biscuit 2.webp";
 import Biscuit3 from "../../assits/Biscuit 3.webp";
@@ -46,6 +44,9 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
 
+
+  // Dummy ProductsDetails Array
+
   const dummyProducts = [
     {
       id: 1,
@@ -59,14 +60,14 @@ const ProductDetails = () => {
       img: Biscuit2,
       Category: "Nuts & Biscuits",
       title: "Belmont Custard ",
-      price:  0.8,
+      price: 0.8,
     },
     {
       id: 3,
       img: Biscuit3,
       Category: "Nuts & Biscuits",
       title: "Crawford Digestives",
-      price:  10,
+      price: 10,
     },
     {
       id: 4,
@@ -80,14 +81,14 @@ const ProductDetails = () => {
       img: Biscuit5,
       Category: "Nuts & Biscuits",
       title: "Crawford Shortie",
-      price:  25,
+      price: 25,
     },
     {
       id: 6,
       img: Biscuit6,
       Category: "Nuts & Biscuits",
       title: "Lotus Biscoff",
-      price:  2.5,
+      price: 2.5,
     },
     {
       id: 7,
@@ -129,7 +130,7 @@ const ProductDetails = () => {
       img: Chocolate12,
       Category: "Chocolates",
       title: "Dairy Milk Crispello",
-      price:  3.5,
+      price: 3.5,
     },
     {
       id: 13,
@@ -143,28 +144,28 @@ const ProductDetails = () => {
       img: Chocolatemix14,
       Category: "Crisps",
       title: "Snikers Slice",
-      price:  7.25,
+      price: 7.25,
     },
     {
       id: 15,
       img: Chocolatemix15,
       Category: "Crisps",
       title: "M & M Funsize",
-      price:  8.5,
+      price: 8.5,
     },
     {
       id: 16,
       img: Chocolatemix16,
       Category: "Crisps",
       title: "Hersheys Kisses",
-      price:  9.5,
+      price: 9.5,
     },
     {
       id: 17,
       img: Chocolatemix17,
       Category: "Crisps",
       title: "Nestle Kitkat",
-      price:  10.5,
+      price: 10.5,
     },
     {
       id: 18,
@@ -178,35 +179,35 @@ const ProductDetails = () => {
       img: lays19,
       Category: "Puzzles lays",
       title: "Lays Baked",
-      price:  2.25,
+      price: 2.25,
     },
     {
       id: 20,
       img: lays20,
       Category: "Puzzles lays",
       title: "Lays Sea Salted",
-      price:  8.75,
+      price: 8.75,
     },
     {
       id: 21,
       img: lays21,
       Category: "Puzzles lays",
       title: "Lays Sour Cream",
-      price:  6.25,
+      price: 6.25,
     },
     {
       id: 22,
       img: lays22,
       Category: "Puzzles lays",
       title: "Snack Rite Ready Saled",
-      price:  3.75,
+      price: 3.75,
     },
     {
       id: 23,
       img: lays23,
       Category: "Puzzles lays",
       title: "Nims Apple Crisp",
-      price:  8.5,
+      price: 8.5,
     },
     {
       id: 24,
@@ -220,21 +221,21 @@ const ProductDetails = () => {
       img: Mixbiscuits25,
       Category: "Snacks ",
       title: "Hill Mini Pack Mix",
-      price:  1.75,
+      price: 1.75,
     },
     {
       id: 26,
       img: Mixbiscuits26,
       Category: "Snacks",
       title: "Khong Guan Premium Marie",
-      price:  5.5,
+      price: 5.5,
     },
     {
       id: 27,
       img: Mixbiscuits27,
       Category: "Snacks",
       title: "Jammie Dodgers Raspberry",
-      price:  7.25,
+      price: 7.25,
     },
     {
       id: 28,
@@ -248,20 +249,20 @@ const ProductDetails = () => {
       img: Mixbiscuits29,
       Category: "Snacks",
       title: "Doritos Tangy Cheese",
-      price:  6.75,
+      price: 6.75,
     },
     {
       id: 30,
       img: Mixbiscuits30,
       category: "Snacks",
       title: "Lays Kettle Cooked",
-      price:  10.25,
+      price: 10.25,
     },
   ];
 
   useEffect(() => {
-    console.log("ID from URL:", id); // Debugging Log
-    const productId = parseInt(id, 10); // Convert URL id to number
+    console.log("ID from URL:", id); 
+    const productId = parseInt(id, 10); 
     const foundProduct = dummyProducts.find((p) => p.id === productId);
 
     if (foundProduct) {
@@ -287,13 +288,6 @@ const ProductDetails = () => {
     );
   }
 
-  // sx={{
-  // padding: 2,
-  // borderRadius: 2,
-  // boxShadow: 3,
-  //
-  // }}
-
   return (
     <Box
       className="container"
@@ -317,7 +311,6 @@ const ProductDetails = () => {
           padding: 5,
         }}
       >
-        {/* Image Section */}
         <Grid
           item
           xs={12}
@@ -328,8 +321,6 @@ const ProductDetails = () => {
         >
           <CardMedia component="img" image={product.img} alt={product.title} />
         </Grid>
-
-        {/* Details Section */}
         <Grid item xs={12} md={6}>
           <Box>
             <Typography

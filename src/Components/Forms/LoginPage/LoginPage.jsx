@@ -9,7 +9,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import Logo from "../../../assits/Logo-new.webp";
 
 const modalStyle = {
@@ -28,12 +28,13 @@ export default function AuthModal({ openModal, setOpenModal }) {
   const [showPassword, setShowPassword] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
 
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +43,9 @@ export default function AuthModal({ openModal, setOpenModal }) {
 
   const validateForm = () => {
     const newErrors = {};
+    if (!formData.name.trim() && isRegister) {
+      newErrors.name = "Name is required.";
+    }
     if (!formData.email.trim()) {
       newErrors.email = "Email is required.";
     }
@@ -69,14 +73,14 @@ export default function AuthModal({ openModal, setOpenModal }) {
 
     if (user) {
       alert("Login successful!");
-      handleClose(); 
-      navigate("/"); 
+      handleClose();
+      navigate("/");
     } else {
       alert("Invalid credentials. Please register first.");
     }
 
     setErrors({});
-    setFormData({ email: "", password: "" });
+    setFormData({ name: "", email: "", password: "" });
   };
 
   const handleRegister = (e) => {
@@ -94,12 +98,12 @@ export default function AuthModal({ openModal, setOpenModal }) {
     setIsRegister(false);
 
     setErrors({});
-    setFormData({ email: "", password: "" });
+    setFormData({ name: "", email: "", password: "" });
   };
 
   const toggleForm = () => {
     setIsRegister((prev) => !prev);
-    setFormData({ email: "", password: "" });
+    setFormData({ name: "", email: "", password: "" });
     setErrors({});
   };
 
@@ -119,9 +123,6 @@ export default function AuthModal({ openModal, setOpenModal }) {
           className="my-4 pb-3"
         >
           <img src={Logo} alt="PickBazar Logo" style={{ height: 40 }} />
-          <Typography variant="h6" sx={{ fontWeight: "bold", color: "#333" }}>
-            PickBazar
-          </Typography>
           <Typography variant="subtitle1" sx={{ mt: 1, color: "#666" }}>
             {isRegister
               ? "Create an account to get started"
@@ -129,11 +130,19 @@ export default function AuthModal({ openModal, setOpenModal }) {
           </Typography>
         </Box>
 
-        <Stack
-          spacing={2}
-          component="form"
-          noValidate
-        >
+        <Stack spacing={2} component="form" noValidate>
+          {isRegister && (
+            <TextField
+              fullWidth
+              placeholder="Enter Name"
+              size="small"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              error={!!errors.name}
+              helperText={errors.name}
+            />
+          )}
           <TextField
             type="email"
             fullWidth

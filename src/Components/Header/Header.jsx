@@ -31,7 +31,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const [product, setProduct] = useState("")
+  const [product, setProduct] = useState("");
 
   const handleChange = (event) => {
     setProduct(event.target.value);
@@ -76,7 +76,7 @@ const Header = () => {
                 {" "}
                 <FormatAlignLeftIcon />
               </Box>
-              
+
               <img className=" img-fluid w-75 h-75 me-5" src={logo} alt="" />
             </Box>
 
@@ -183,7 +183,8 @@ const Header = () => {
                 </Menu>
               </Box>
             ) : (
-              <Button className="me-2"
+              <Button
+                className="me-2"
                 sx={{
                   textTransform: "none",
                   background: "#019376",

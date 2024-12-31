@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import {
   Box,
   Button,
@@ -13,7 +13,8 @@ import {
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
 import { useNavigate } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
+
+// Import image from file
 
 import Biscuit1 from "../../assits/Biscuit 1.webp";
 import Biscuit2 from "../../assits/Biscuit 2.webp";
@@ -47,6 +48,8 @@ import Mixbiscuits29 from "../../assits/Mix biscuits 5.webp";
 import Mixbiscuits30 from "../../assits/Mix biscuits 6.webp";
 import { addToCart } from "../../cartSlice";
 import { useDispatch } from "react-redux";
+
+// Dummy Products Array
 
 const copyProduct = [
   {
@@ -273,19 +276,22 @@ const Products = () => {
 
   return (
     <Box>
-      <FormControl className="d-block d-sm-block d-md-block d-lg-none" sx={{ m: 1, minWidth: 150 }}>
+      {/* small screen Filter Category */}
+      <FormControl
+        className="d-block d-sm-block d-md-block d-lg-none"
+        sx={{ m: 1, minWidth: 150 }}
+      >
         <Select
           size="small"
           value={selectedCategory}
           onChange={(event) => setSelectedCategory(event.target.value)}
           displayEmpty
-          inputProps={{ "aria-label": "Select Category"  }}
+          inputProps={{ "aria-label": "Select Category" }}
           sx={{
             backgroundColor: "#fff",
             borderRadius: "8px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
             padding: "10px",
-          
           }}
         >
           <MenuItem value="">
@@ -305,6 +311,9 @@ const Products = () => {
           </MenuItem>
         </Select>
       </FormControl>
+
+       {/* Large screen Filter Category */}
+
       <Box className="d-flex bg-body-tertiary my-5 ">
         <Box className=" mt-3 justify-content-between ">
           <Box
@@ -366,6 +375,9 @@ const Products = () => {
             </Box>
           </Box>
         </Box>
+
+         {/* Map the All products */}
+
         <Grid container className=" mt-3">
           {filteredProducts?.map((copyProduct, index) => (
             <Grid item xs={12} sm={6} md={4} lg={4} xl={2} key={index}>

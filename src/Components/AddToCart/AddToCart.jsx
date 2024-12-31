@@ -9,7 +9,6 @@ import {
   Card,
   CardContent,
   CardActions,
-  CardMedia,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -27,14 +26,13 @@ const AddToCart = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  
   useEffect(() => {
     const calculatedTotalPrice = cart.reduce(
       (sum, itemProduct) => sum + itemProduct.price * itemProduct.quantity,
       0
     );
-    setTotalPrice(calculatedTotalPrice); 
-  }, [cart]); 
+    setTotalPrice(calculatedTotalPrice);
+  }, [cart]);
 
   const cartContent = () => (
     <Box
@@ -104,7 +102,7 @@ const AddToCart = () => {
                 <Typography className="fs-6 fw-bold ">
                   {product.title}
                 </Typography>
-                <Typography className="fs-6 fw-bold text-success" >
+                <Typography className="fs-6 fw-bold text-success">
                   ${product.price.toFixed(2)}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "gray" }}>
@@ -141,11 +139,10 @@ const AddToCart = () => {
           borderTop: "1px solid #ddd",
         }}
       >
-        <Button
+        <Button className="bg-success"
           variant="contained"
           sx={{
             flexGrow: 1,
-            backgroundColor: "#009688",
             justifyContent: "space-between",
             borderRadius: "30px",
             py: "10px",
@@ -174,17 +171,16 @@ const AddToCart = () => {
     <Box>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, p: 3 }}>
         {products.map((product) => {
-
           return (
-            <Card key={product.id} sx={{ width: 300 }}>
+            <Card  key={product.id} sx={{ width: 300 }}>
               <CardContent>
                 <img
                   src={product.img}
-                  alt={product.title} 
+                  alt={product.title}
                   style={{
-                    width: "100%", 
+                    width: "100%",
                     height: "auto",
-                    objectFit: "cover", 
+                    objectFit: "cover",
                   }}
                 />
                 <Typography variant="h6" sx={{ fontWeight: "bold" }}>

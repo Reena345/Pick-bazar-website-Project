@@ -6,7 +6,6 @@ import {
   Button,
   Grid,
   Divider,
-
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ProfileImage from "../../assits/acount-profile.webp";
@@ -16,7 +15,9 @@ const ProfileDashboard = () => {
 
   const [name, setName] = useState(localStorage.getItem("name") || "John Doe");
   const [bio, setBio] = useState(localStorage.getItem("bio") || "");
-  const [email, setEmail] = useState(localStorage.getItem("email") || "admin@demo.com");
+  const [email, setEmail] = useState(
+    localStorage.getItem("email") || "admin@demo.com"
+  );
 
   const handleSaveProfile = () => {
     localStorage.setItem("name", name);
@@ -58,7 +59,13 @@ const ProfileDashboard = () => {
               Wallet Points
             </Typography>
             <Divider sx={{ marginY: 2 }} />
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <Box sx={{ flex: 1, textAlign: "center" }}>
                 <Typography variant="h5">0</Typography>
                 <Typography variant="body2" color="textSecondary">
@@ -134,7 +141,9 @@ const ProfileDashboard = () => {
           <Box sx={{ backgroundColor: "#fff", padding: 3, borderRadius: 2 }}>
             <Divider sx={{ marginY: 2 }} />
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2, marginY: 2 }}>
+            <Box
+              sx={{ display: "flex", alignItems: "center", gap: 2, marginY: 2 }}
+            >
               <Box
                 sx={{
                   width: 100,
@@ -187,7 +196,12 @@ const ProfileDashboard = () => {
             </Button>
           </Box>
           <Box
-            sx={{ backgroundColor: "#fff", padding: 3, borderRadius: 2, marginTop: 3 }}
+            sx={{
+              backgroundColor: "#fff",
+              padding: 3,
+              borderRadius: 2,
+              marginTop: 3,
+            }}
           >
             <Typography variant="h6" gutterBottom>
               Email
@@ -214,7 +228,6 @@ const ProfileDashboard = () => {
             sx={{
               padding: 3,
               backgroundColor: "#f9f9f9",
-
             }}
           >
             {/* Contact Number Section */}
@@ -227,10 +240,12 @@ const ProfileDashboard = () => {
                 marginBottom: 3,
               }}
             >
-              <Box sx={{
-                justifyContent: "space-between",
-                display: "flex"
-              }}>
+              <Box
+                sx={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                }}
+              >
                 <Typography variant="h6" sx={{ marginBottom: 2 }}>
                   Contact Number
                 </Typography>
@@ -246,13 +261,10 @@ const ProfileDashboard = () => {
               </Box>
               <Box
                 sx={{
-                  border: "black"
+                  border: "black",
                 }}
               >
-                <TextField
-                  fullWidth
-                  placeholder="+1 (936) 514-1641"
-                />
+                <TextField fullWidth placeholder="+1 (936) 514-1641" />
               </Box>
             </Box>
 
@@ -265,10 +277,12 @@ const ProfileDashboard = () => {
                 boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
               }}
             >
-              <Box sx={{
-                justifyContent: "space-between",
-                display: "flex"
-              }}>
+              <Box
+                sx={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                }}
+              >
                 <Typography variant="h6" sx={{ marginBottom: 2 }}>
                   Addresses
                 </Typography>
@@ -328,8 +342,7 @@ const ProfileDashboard = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Box sx={{ marginTop: 2, textAlign: "right" }}>
-              </Box>
+              <Box sx={{ marginTop: 2, textAlign: "right" }}></Box>
             </Box>
           </Box>
         </Grid>

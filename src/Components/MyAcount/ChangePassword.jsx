@@ -41,19 +41,27 @@ const ChangePassword = () => {
     <Box sx={{ padding: 3, backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={3}>
-          <Box sx={{
-            backgroundColor: "#fff",
-            padding: 3,
-            borderRadius: 2,
-            marginBottom: 3,
-            py: 10,
-            boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
-          }}>
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              padding: 3,
+              borderRadius: 2,
+              marginBottom: 3,
+              py: 10,
+              boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
+            }}
+          >
             <Typography variant="h6" sx={{ marginBottom: 2 }}>
               Wallet Points
             </Typography>
             <Divider sx={{ marginY: 2 }} />
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <Box sx={{ textAlign: "center" }}>
                 <Typography variant="h5">0</Typography>
                 <Typography variant="body2" color="textSecondary">
@@ -76,7 +84,14 @@ const ChangePassword = () => {
               </Box>
             </Box>
           </Box>
-          <Box sx={{ backgroundColor: "#fff", padding: 2, borderRadius: 2, marginTop: 3 }}>
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              padding: 2,
+              borderRadius: 2,
+              marginTop: 3,
+            }}
+          >
             <Typography
               variant="body1"
               sx={{ marginBottom: 3, cursor: "pointer" }}
@@ -84,17 +99,25 @@ const ChangePassword = () => {
             >
               Profile
             </Typography>
-            {["Change Password", "My Orders", "Downloads", "My Wishlists", "My Questions", "My Refunds", "My Reports", "My Cards", "Need Help"].map(
-              (item, index) => (
-                <Typography
-                  key={index}
-                  variant="body1"
-                  sx={{ marginBottom: 3, cursor: "pointer" }}
-                >
-                  {item}
-                </Typography>
-              )
-            )}
+            {[
+              "Change Password",
+              "My Orders",
+              "Downloads",
+              "My Wishlists",
+              "My Questions",
+              "My Refunds",
+              "My Reports",
+              "My Cards",
+              "Need Help",
+            ].map((item, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ marginBottom: 3, cursor: "pointer" }}
+              >
+                {item}
+              </Typography>
+            ))}
             <Typography
               variant="body1"
               sx={{ marginBottom: 2, cursor: "pointer" }}
@@ -105,8 +128,15 @@ const ChangePassword = () => {
           </Box>
         </Grid>
         <Grid item xs={12} md={9}>
-          <Box sx={{ backgroundColor: "#fff", padding: 3, borderRadius: 2, boxShadow: "0px 2px 5px rgba(0,0,0,0.1)"  }}>
-                <Divider sx={{ marginY: 2 }} />
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              padding: 3,
+              borderRadius: 2,
+              boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
+            }}
+          >
+            <Divider sx={{ marginY: 2 }} />
             <Typography variant="h6" fontWeight="bold" sx={{ marginBottom: 2 }}>
               Change Password
             </Typography>

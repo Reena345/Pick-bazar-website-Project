@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/navigation";
 
 // Import required modules
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from "swiper/modules";
 
 // Import image from file
-import DeliveryImg1 from '../../assits/offer-5.webp';
-import DeliveryImg2 from '../../assits/offer-4.webp';
-import DeliveryImg3 from '../../assits/offer-3.webp';
-import DeliveryImg4 from '../../assits/offer-2.webp';
-import DeliveryImg5 from '../../assits/offer-1.webp';
-import { Grid2 } from '@mui/material';
+import DeliveryImg1 from "../../assits/offer-5.webp";
+import DeliveryImg2 from "../../assits/offer-4.webp";
+import DeliveryImg3 from "../../assits/offer-3.webp";
+import DeliveryImg4 from "../../assits/offer-2.webp";
+import DeliveryImg5 from "../../assits/offer-1.webp";
+import { Grid2 } from "@mui/material";
 
 const DeliveryProduct = () => {
   return (
@@ -31,9 +31,9 @@ const DeliveryProduct = () => {
           modules={[Pagination, Navigation]}
           className="mySwiper"
           breakpoints={{
-            0: { slidesPerView: 1 }, 
-            640: { slidesPerView: 2 }, 
-            768: { slidesPerView: 3 }, 
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
             1024: { slidesPerView: 4 },
           }}
         >
@@ -64,7 +64,6 @@ const DeliveryProduct = () => {
           </Grid2>
         </Swiper>
       </Grid2>
-      
     </div>
   );
 };
