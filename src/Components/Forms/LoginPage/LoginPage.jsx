@@ -7,6 +7,7 @@ import {
   Button,
   Stack,
   InputAdornment,
+  InputLabel,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +18,7 @@ const modalStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 450,
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -125,28 +126,30 @@ export default function AuthModal({ openModal, setOpenModal }) {
           <img src={Logo} alt="PickBazar Logo" style={{ height: 40 }} />
           <Typography variant="subtitle1" sx={{ mt: 1, color: "#666" }}>
             {isRegister
-              ? "Create an account to get started"
+              ? "By signing up, you agree to ourterms & policy"
               : "Login with your email & password"}
           </Typography>
         </Box>
 
         <Stack spacing={2} component="form" noValidate>
           {isRegister && (
-            <TextField
-              fullWidth
-              placeholder="Enter Name"
-              size="small"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              error={!!errors.name}
-              helperText={errors.name}
-            />
+            <Box>
+              <InputLabel htmlFor="component-helper">Name</InputLabel>
+              <TextField
+                fullWidth
+                size="small"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
+              />
+            </Box>
           )}
+          <InputLabel htmlFor="component-helper">Email</InputLabel>
           <TextField
             type="email"
             fullWidth
-            placeholder="Enter Email"
             size="small"
             name="email"
             value={formData.email}
@@ -154,9 +157,9 @@ export default function AuthModal({ openModal, setOpenModal }) {
             error={!!errors.email}
             helperText={errors.email}
           />
+          <InputLabel htmlFor="component-helper">Password</InputLabel>
           <TextField
             fullWidth
-            placeholder="Enter Password"
             size="small"
             type={showPassword ? "text" : "password"}
             name="password"
@@ -205,8 +208,8 @@ export default function AuthModal({ openModal, setOpenModal }) {
           </Typography>
           {!isRegister && (
             <Button
-              variant="outlined"
-              color="secondary"
+              className="text-bg-primary"
+              variant=""
               fullWidth
               sx={{ textTransform: "none" }}
             >
@@ -215,8 +218,8 @@ export default function AuthModal({ openModal, setOpenModal }) {
           )}
           {!isRegister && (
             <Button
-              variant="outlined"
-              color="primary"
+              className=" text-bg-secondary bg"
+              variant=""
               fullWidth
               sx={{ textTransform: "none" }}
             >
