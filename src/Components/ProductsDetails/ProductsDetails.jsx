@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   CardMedia,
   Typography,
   Grid,
+  Button,
 } from "@mui/material";
 
 // Import image from file
@@ -43,6 +44,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
 
   // Dummy ProductsDetails Array
@@ -264,6 +266,7 @@ const ProductDetails = () => {
     console.log("ID from URL:", id); 
     const productId = parseInt(id, 10); 
     const foundProduct = dummyProducts.find((p) => p.id === productId);
+   
 
     if (foundProduct) {
       setProduct(foundProduct);
@@ -271,6 +274,10 @@ const ProductDetails = () => {
       setError("Product not found");
     }
   }, [id]);
+  const handleHomeClick = () => {
+    navigate("/"); 
+  };
+  
 
   if (error) {
     return (
@@ -348,6 +355,13 @@ const ProductDetails = () => {
             >
               Price: {product.price}
             </Typography>
+            <Button className="border-success w-50"
+        onClick={handleHomeClick}
+        variant="outlined"
+        sx={{ marginTop: 3 }}
+      >
+     Home & Cleaning
+      </Button>
           </Box>
         </Grid>
       </Grid>

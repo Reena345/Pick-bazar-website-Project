@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import ProfileDashboard from "./Components/MyAcount/MyAcount";
 import ChangePassword from "./Components/MyAcount/ChangePassword";
+import ErrorPage from "./Components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/ChangePassword",
         element: <ChangePassword />,
+      },
+      {
+        path: "*", 
+        element: <ErrorPage />,
       },
     ],
   },
