@@ -9,6 +9,7 @@ import {
   Card,
   CardContent,
   CardActions,
+  useMediaQuery,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -25,6 +26,7 @@ const AddToCart = () => {
   const dispatch = useDispatch();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const calculatedTotalPrice = cart.reduce(
@@ -37,7 +39,7 @@ const AddToCart = () => {
   const cartContent = () => (
     <Box
       sx={{
-        width: 450,
+        width: isSmallScreen ? "100vw" : 450,
         display: "flex",
         flexDirection: "column",
         height: "100%",
@@ -72,22 +74,21 @@ const AddToCart = () => {
                 alignItems: "center",
                 borderBottom: "1px solid #ddd",
                 py: 1,
+                flexDirection: isSmallScreen ? "column" : "row",
               }}
             >
-              <Box className="bg-body-secondary rounded-4 me-3">
-                <Button
+              <Box className="bg-body-secondary rounded-4  px-1 ">
+                <Button className="text-black fs-3"
                   sx={{ minWidth: 30, height: 30 }}
-                  variant=""
                   onClick={() => dispatch(decreaseQuantity(product.id))}
                 >
                   -
                 </Button>
-                <Typography sx={{ mx: 2, fontWeight: "bold" }}>
+                <Typography sx={{ mx: 1, fontWeight: "bold" }}>
                   {product.quantity}
                 </Typography>
-                <Button
+                <Button className="text-black fs-5"
                   sx={{ minWidth: 30, height: 30 }}
-                  variant=""
                   onClick={() => dispatch(increaseQuantity(product.id))}
                 >
                   +
@@ -96,12 +97,15 @@ const AddToCart = () => {
               <img
                 src={product.img}
                 alt={product.name}
-                style={{ width: "50px", height: "50px", borderRadius: "5px" }}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "5px",
+                  marginTop: isSmallScreen ? "10px" : "0",
+                }}
               />
-              <Box sx={{ flexGrow: 1, mx: 2 }}>
-                <Typography className="fs-6 fw-bold ">
-                  {product.title}
-                </Typography>
+              <Box sx={{ flexGrow: 1, mx: 2, textAlign: isSmallScreen ? "center" : "left" }}>
+                <Typography className="fs-6 fw-bold">{product.title}</Typography>
                 <Typography className="fs-6 fw-bold text-success">
                   ${product.price.toFixed(2)}
                 </Typography>
@@ -109,13 +113,12 @@ const AddToCart = () => {
                   {product.quantity} X 1pc(s)
                 </Typography>
               </Box>
-
-              <Typography sx={{ fontWeight: "bold" }}>
+              <Typography sx={{ fontWeight: "bold", marginTop: isSmallScreen ? "10px" : "0" }}>
                 ${(product.price * product.quantity).toFixed(2)}
               </Typography>
               <IconButton
                 onClick={() => dispatch(removeFromCart(product.id))}
-                sx={{ color: "red" }}
+                sx={{ color: "red", marginTop: isSmallScreen ? "10px" : "0" }}
               >
                 <CloseIcon />
               </IconButton>
@@ -139,7 +142,8 @@ const AddToCart = () => {
           borderTop: "1px solid #ddd",
         }}
       >
-        <Button className="bg-success"
+        <Button
+          className="bg-success"
           variant="contained"
           sx={{
             flexGrow: 1,
@@ -170,30 +174,28 @@ const AddToCart = () => {
   return (
     <Box>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, p: 3 }}>
-        {products.map((product) => {
-          return (
-            <Card  key={product.id} sx={{ width: 300 }}>
-              <CardContent>
-                <img
-                  src={product.img}
-                  alt={product.title}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    objectFit: "cover",
-                  }}
-                />
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                  {product.title}
-                </Typography>
-                <Typography variant="body1" sx={{ color: "#019376" }}>
-                  ${product.price}
-                </Typography>
-              </CardContent>
-              <CardActions></CardActions>
-            </Card>
-          );
-        })}
+        {products.map((product) => (
+          <Card key={product.id} sx={{ width: 300 }}>
+            <CardContent>
+              <img
+                src={product.img}
+                alt={product.title}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  objectFit: "cover",
+                }}
+              />
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                {product.title}
+              </Typography>
+              <Typography variant="body1" sx={{ color: "#019376" }}>
+                ${product.price}
+              </Typography>
+            </CardContent>
+            <CardActions></CardActions>
+          </Card>
+        ))}
       </Box>
 
       <Button
